@@ -1,7 +1,7 @@
 # OverTheWire Bandit Game Solutions (Levels 1-20)
 
 ## Introduction
-The **OverTheWire Bandit game** is a fun and challenging way to learn fundamental Linux commands and concepts through hands-on problem-solving. It consists of a series of levels, where each level requires you to solve a challenge using different Linux tools and techniques. It's a great resource for beginners to get comfortable with the Linux environment in a safe and engaging way.
+The **OverTheWire Bandit game** is a fun and challenging way to learn core Linux commands and concepts through hands-on problem-solving. It consists of a series of levels, where each level requires you to solve a challenge using different Linux tools and techniques. It's a great resource for beginners to get comfortable with the Linux environment in a safe and engaging way.
 
 I decided to go through this game to solidify my understanding of fundamental Linux commands, improve my troubleshooting skills, and learn how to approach problems systematically. It's been an excellent practical resource on my journey to mastering Linux!
 
@@ -73,7 +73,7 @@ This will return you to the local shell.
 ### Level Goal
 The password for the next level is stored in a file called - located in the home directory.
 ### Solution
-Connect to the next level through `ssh` by using the same command used previously. However this time we will change the username to `bandit1`. The command should look like this:
+Connect to the next level through `ssh` by using the same command used previously. However, this time we will change the username to `bandit1`. The command should look like this:
 
 ```bash
 ssh bandit1@bandit.labs.overthewire.org -p 2220
@@ -108,7 +108,7 @@ You can now use the `exit` command to return to the local shell and begin the ne
 ### Level Goal
 The password for the next level is stored in a file called spaces in this filename located in the home directory.
 ### Solution
-Connect to the next level through `ssh` by using the same command used previously. However this time we will change the username to `bandit2`. The command should look like this:
+Connect to the next level through `ssh` by using the same command used previously. However, this time we will change the username to `bandit2`. The command should look like this:
 
 ```bash
 ssh bandit2@bandit.labs.overthewire.org -p 2220
@@ -135,7 +135,7 @@ You can now use the `exit` command to return to the local shell and begin the ne
 ### Level Goal
 The password for the next level is stored in a hidden file in the inhere directory.
 ### Solution
-Connect to the next level through `ssh` by using the same command used previously. However this time we will change the username to `bandit3`. The command should look like this:
+Connect to the next level through `ssh` by using the same command used previously. However, this time we will change the username to `bandit3`. The command should look like this:
 
 ```bash
 ssh bandit3@bandit.labs.overthewire.org -p 2220
@@ -172,7 +172,7 @@ You can now use the `exit` command to return to the local shell and begin the ne
 ### Level Goal
 The password for the next level is stored in the only human-readable file in the inhere directory. 
 ### Solution
-Connect to the next level through `ssh` by using the same command used previously. However this time we will change the username to `bandit4`. The command should look like this:
+Connect to the next level through `ssh` by using the same command used previously. However, this time we will change the username to `bandit4`. The command should look like this:
 
 ```bash
 ssh bandit4@bandit.labs.overthewire.org -p 2220
@@ -207,7 +207,73 @@ You can now use the `exit` command to return to the local shell and begin the ne
 - **file**
 - **cat**
 
+## Level 5-6
+### Level Goal
+The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties:
 
+- **human-readable**
+- **1033 bytes in size**
+- **not executable**
+### Solution
+Connect to the next level through `ssh` by using the same command used previously. However, this time we will change the username to `bandit5`. The command should look like this:
+
+```bash
+ssh bandit5@bandit.labs.overthewire.org -p 2220
+```
+You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-4-5)
+
+The level description informs us that the file storing the password is in the `inhere` directory. We can navigate to that directory by using the `cd` command.
+
+```bash
+cd inhere
+```
+
+We will now use the `find` command to search for the desired file using the parameters mentioned in the level description. To get a better understanding of the options for the `find` command, I referred to its man page. The `man` page  is a built-in Linux documentation system that provides detailed information about commands, including their usage, options, and syntax. You can access it by typing `man` followed by the command you want to search.
+
+```bash
+man find
+```
+
+With this I was able to find the following options to help narrow my search:
+
+- `-type`: Allows you to specify whether it's a file or directory you're searching for. I used `f` as that indicates we're searching for a file.
+- `-size`: Allows you to specify the size of the file. I followed this with `1033c` which means it is 1033 bytes in size.
+- `-! -executable`: Used to only output files that are not executable.
+
+With this information we can now use the following command to search for the file:
+
+```bash
+find -type f -size 1033c ! -executable
+```
+This will output the path to the file which contains the password:
+
+```bash
+./maybehere07/.file2
+```
+
+To confirm that the file is human readable, we can use the `file` command followed by the path to the file. 
+
+```bash
+file ./maybehere07/.file2 
+```
+
+The output was **ASCII text** which confirms it is human readable. 
+
+Lastly, we'll use the `cat` command followed by file path to obtain the password to the next level.
+
+```bash
+cat ./maybehere07/.file2 
+```
+The password for the next level should now be displayed in the terminal.
+
+You can now use the `exit` command to return to the local shell and begin the next level.
+
+### Key Commands
+- **cd**
+- **file**
+- **man**
+- **find**
+- **cat**
 
 
 
