@@ -30,7 +30,7 @@ The password for the next level is stored in a file called readme located in the
 ### Solution
 Repeat the command provided in the [previous level](#level-0) if you aren't connected already.
 
-Once connected, we should automatically be placed in the home directory. We can confirm this by using the `pwd` command which will print out the currently directory. 
+Once connected, we should automatically be placed in the home directory. We can confirm this by using the `pwd` command which will print out the current working directory. 
 
 ```bash
 pwd
@@ -46,7 +46,7 @@ Which will output the following:
 readme
 ```
 
-Now that we have confirmed that we have located the `readme` file and we are in the correct directory, we can use the `cat` command to display the contents of the `readme` file. This is how it should look:
+Now that we have confirmed the location of the `readme` file and we are in the correct directory, we can use the `cat` command to display the contents of the `readme` file. This is how the command should look:
 
 ```bash
 cat readme
@@ -67,4 +67,41 @@ This will return you to the local shell.
 - **ls**
 - **cat**
 - **exit**
+
+
+## Level 1-2
+### Level Goal
+The password for the next level is stored in a file called - located in the home directory.
+### Solution
+Connect to the next level using `ssh` using the same command used previously. However this time we will change the username to `bandit1`. The command should look like this:
+
+```bash
+ssh bandit1@bandit.labs.overthewire.org -p 2220
+```
+You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-0-1).
+
+Once connected, we'll once again use the `ls` command to confirm that the file we need is in the home directory.
+
+```bash
+ls
+```
+Which will output the necessary file name. 
+
+
+A file named `-` cannot be accessed using `cat` by itself because the `-` is interpreted as a special argument, typically representing **standard input (stdin)**, rather than as the name of a file. To access the file, you can use `./-`, which explicitly specifies the file in the **current directory**, bypassing the special meaning of `-`. This is how the command should appear:
+
+```bash
+cat ./readme
+```
+
+This will output the password to access the next level.
+
+The `.` represents the current directory in a filesystem path and is used to explicitly refer to files or commands within that directory. We can use `ls -a` to view the `.` directory because the `-a` **option** lists all entries in the directory, including **hidden files** and **special directories** like `.` (representing the current directory) and `..` (representing the parent directory). This allows us to explicitly see the `.` directory listed as part of the output.
+
+You can now use the `exit` command to return to the local shell and begin the next level.
+
+### Key Commands
+- **cat**
+- **ls -a**
+
 
