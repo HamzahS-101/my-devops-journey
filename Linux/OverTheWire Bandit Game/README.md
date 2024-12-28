@@ -108,7 +108,7 @@ You can now use the `exit` command to return to the local shell and begin the ne
 ### Level Goal
 The password for the next level is stored in a file called spaces in this filename located in the home directory.
 ### Solution
-Connect to the next level through `ssh` by using the same command used previously. However, this time we will change the username to `bandit2`. The command should look like this:
+Connect to the next level through `ssh` by using the following command:
 
 ```bash
 ssh bandit2@bandit.labs.overthewire.org -p 2220
@@ -135,7 +135,7 @@ You can now use the `exit` command to return to the local shell and begin the ne
 ### Level Goal
 The password for the next level is stored in a hidden file in the inhere directory.
 ### Solution
-Connect to the next level through `ssh` by using the same command used previously. However, this time we will change the username to `bandit3`. The command should look like this:
+Connect to the next level through `ssh` by using the following command:
 
 ```bash
 ssh bandit3@bandit.labs.overthewire.org -p 2220
@@ -172,7 +172,7 @@ You can now use the `exit` command to return to the local shell and begin the ne
 ### Level Goal
 The password for the next level is stored in the only human-readable file in the inhere directory. 
 ### Solution
-Connect to the next level through `ssh` by using the same command used previously. However, this time we will change the username to `bandit4`. The command should look like this:
+Connect to the next level through `ssh` by using the following command:
 
 ```bash
 ssh bandit4@bandit.labs.overthewire.org -p 2220
@@ -211,11 +211,11 @@ You can now use the `exit` command to return to the local shell and begin the ne
 ### Level Goal
 The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties:
 
-- **human-readable**
+- **Human-readable**
 - **1033 bytes in size**
-- **not executable**
+- **Not executable**
 ### Solution
-Connect to the next level through `ssh` by using the same command used previously. However, this time we will change the username to `bandit5`. The command should look like this:
+CConnect to the next level through `ssh` by using the following command:
 
 ```bash
 ssh bandit5@bandit.labs.overthewire.org -p 2220
@@ -238,7 +238,7 @@ With this I was able to find the following options to help narrow my search:
 
 - `-type`: Allows you to specify whether it's a file or directory you're searching for. I used `f` as that indicates we're searching for a file.
 - `-size`: Allows you to specify the size of the file. I followed this with `1033c` which means it is 1033 bytes in size.
-- `-! -executable`: Used to only output files that are not executable.
+- `-! -executable`: This is used to only output files that are not executable.
 
 With this information we can now use the following command to search for the file:
 
@@ -275,8 +275,45 @@ You can now use the `exit` command to return to the local shell and begin the ne
 - **find**
 - **cat**
 
+## Level 6-7
+### Level Goal
+The password for the next level is stored somewhere on the server and has all of the following properties:
 
+- **Owned by user bandit7**
+- **Owned by group bandit6**
+- **33 bytes in size**
+### Solution
+Connect to the next level through `ssh` by using the following command:
 
+```bash
+ssh bandit6@bandit.labs.overthewire.org -p 2220
+```
+You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-5-6)
+
+We'll use the `find` command once more, however there are some additional options we can use that is found through the `man` page:
+
+- `-group`: Allows us to specify which group owns the file.
+- `-user`: Allows us to specify which user owns the file.
+
+We'll use these new options in the command so we can add the new criteria provided. Rather than using `cd` to navigate to our desired directory, we'll use `/` instead as this indicates that we are searching the entire system. Here's how the command will look:
+
+```bash
+find / -size 33c -group bandit6 -user bandit7
+```
+
+This will locate the file containing the password. We'll now use the `cat` command, followed by the path to the file to retrieve the password to the next level:
+
+```bash
+cat /var/lib/dpkg/info/bandit7.password
+```
+
+The password for the next level should now be displayed in the terminal.
+
+You can now use the `exit` command to return to the local shell and begin the next level.
+
+### Key Commands
+- **find**
+- **cat**
 
 
 
