@@ -73,7 +73,7 @@ This will return you to the local shell.
 ### Level Goal
 The password for the next level is stored in a file called - located in the home directory.
 ### Solution
-Connect to the next level using `ssh` using the same command used previously. However this time we will change the username to `bandit1`. The command should look like this:
+Connect to the next level through `ssh` by using the same command used previously. However this time we will change the username to `bandit1`. The command should look like this:
 
 ```bash
 ssh bandit1@bandit.labs.overthewire.org -p 2220
@@ -85,13 +85,13 @@ Once connected, we'll once again use the `ls` command to confirm that the file w
 ```bash
 ls
 ```
-Which will output the necessary file name. 
+Which will output the necessary filename. 
 
 
 A file named `-` cannot be accessed using `cat` by itself because the `-` is interpreted as a special argument, typically representing **standard input (stdin)**, rather than as the name of a file. To access the file, you can use `./-`, which explicitly specifies the file in the **current directory**, bypassing the special meaning of `-`. This is how the command should appear:
 
 ```bash
-cat ./readme
+cat ./-
 ```
 
 This will output the password to access the next level.
@@ -103,5 +103,38 @@ You can now use the `exit` command to return to the local shell and begin the ne
 ### Key Commands
 - **cat**
 - **ls -a**
+
+## Level 2-3
+### Level Goal
+The password for the next level is stored in a file called spaces in this filename located in the home directory.
+### Solution
+Connect to the next level through `ssh` by using the same command used previously. However this time we will change the username to `bandit2`. The command should look like this:
+
+```bash
+ssh bandit2@bandit.labs.overthewire.org -p 2220
+```
+You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-1-2).
+
+Once connected, use the `ls` command to confirm that the correct file is stored in our current directory.
+
+Once confirmed, we'll use the `cat` command to print out the contents of the file. Since the filename contains spaces, the cat command won't work unless we enclose the name in quotation marks, as it will interpret each word as a separate filename. The command should look like this:
+
+```bash
+cat "spaces in this filename"
+```
+
+The password for the next level should now be displayed in the terminal.
+
+You can now use the `exit` command to return to the local shell and begin the next level.
+
+### Key Commands
+- **ls**
+- **cat**
+
+
+
+
+
+
 
 
