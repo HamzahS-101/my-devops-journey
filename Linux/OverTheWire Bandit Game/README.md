@@ -13,7 +13,9 @@ The goal of this level is for you to log into the game using SSH. The host to wh
 ### Solution
 To connect to the remote server, we need to use **SSH** with the **username** `bandit0`, the **hostname** `bandit.labs.overthewire.org`, and the **port** `2220`, specifying the port using the `-p` **option**. The command will look like this:
 
-```ssh bandit0@bandit.labs.overthewire.org -p 2220```
+```bash
+ssh bandit0@bandit.labs.overthewire.org -p 2220
+```
 
 You will then be prompted to enter the password which has been provided. 
 
