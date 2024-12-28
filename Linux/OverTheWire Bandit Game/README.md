@@ -168,6 +168,45 @@ You can now use the `exit` command to return to the local shell and begin the ne
 - **ls -a**
 - **cat**
 
+## Level 4-5
+### Level Goal
+The password for the next level is stored in the only human-readable file in the inhere directory. 
+### Solution
+Connect to the next level through `ssh` by using the same command used previously. However this time we will change the username to `bandit4`. The command should look like this:
+
+```bash
+ssh bandit4@bandit.labs.overthewire.org -p 2220
+```
+You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-3-4)
+
+The level description informs us that the file storing the password is in the `inhere` directory. We can navigate to that directory by using the `cd` command.
+
+```bash
+cd inhere
+```
+
+The `file` command is used to determine the type of a file by analysing its contents rather than relying on its extension. In this case, we're using it to locate a file that is **ASCII text**, as we are specifically searching for **human-readable files**. Below is the command being used:
+
+```bash
+file ./*
+```
+
+The `*` indicates a wildcard which in this case is used to list the type of all the files in the current directory (inhere).
+
+The output of the last command should include `-file07` which is the only file that matches the human readable criteria. We will now use the `cat` command to print out the contents. However, we must remember to use `./` prior to the filename as the `-` is invalid, as mentioned in [level 1-2](#level-1-2).
+
+```bash
+cat ./-file07
+```
+The password for the next level should now be displayed in the terminal.
+
+You can now use the `exit` command to return to the local shell and begin the next level.
+
+### Key Commands
+- **cd**
+- **file**
+- **cat**
+
 
 
 
