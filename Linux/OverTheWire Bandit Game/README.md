@@ -131,6 +131,45 @@ You can now use the `exit` command to return to the local shell and begin the ne
 - **ls**
 - **cat**
 
+## Level 3-4
+### Level Goal
+The password for the next level is stored in a hidden file in the inhere directory.
+### Solution
+Connect to the next level through `ssh` by using the same command used previously. However this time we will change the username to `bandit3`. The command should look like this:
+
+```bash
+ssh bandit3@bandit.labs.overthewire.org -p 2220
+```
+You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-2-3)
+
+The level description informs us that the file storing the password is in the `inhere` directory. We can navigate to that directory by using the `cd` command.
+
+```bash
+cd inhere
+```
+
+Now we'll use the `ls-a` command to list all files in the `inhere` directory including hidden ones. 
+
+```bash
+ls -a
+```
+
+The output should contain a file named `...Hiding-From-You`. We will now use the `cat` command to display the contents of this file.
+
+```bash
+cat ...Hiding-From-You
+```
+The password for the next level should now be displayed in the terminal.
+
+You can now use the `exit` command to return to the local shell and begin the next level.
+
+### Key Commands
+- **cd**
+- **ls -a**
+- **cat**
+
+
+
 
 
 
