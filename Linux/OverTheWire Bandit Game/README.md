@@ -513,7 +513,7 @@ First we must use the `scp` command to securely copy the **private SSH key** tha
 scp -P 2220 bandit13@bandit.labs.overthewire.org:sshkey.private ~/Desktop/
 ```
 
-The SSH key should now be stored in my Desktop. Before we use the key to connect to **bandit14** we must first adjust the permissions to **read only** the current permissions are too open. We can confirm the current permissions by using the `ls` command with the `-l` like so (ensure you're in the directory that you're running the search for):
+The SSH key should now be stored in my Desktop. Before we use the key to connect to **bandit14** we must first adjust the permissions to **read only** as the current permissions are too open. We can confirm the current permissions by using the `ls` command with the `-l` like so (ensure you're in the directory that you're running the search for):
 
 ```bash
 ls -l
@@ -536,7 +536,27 @@ cat /etc/bandit_pass/bandit14
 ```
 ### Key Commands
 - **scp**
+- **ls -l**
 - **chmod**
 - **ssh -i**
 
+## Level 14-15
+### Level Goal
+The password for the next level can be retrieved by submitting the password of the current level to port 30000 on localhost.
+### Solution
+Connect to the next level through `ssh` by using the following command:
 
+```bash
+ssh bandit14@bandit.labs.overthewire.org -p 2220
+```
+You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-13-14)
+
+To retrieve the password for the next level, use the `nc` command to connect to **port 30000** on **localhost**, then submit the password for the current level when prompted.
+
+```bash
+nc localhost 30000
+```
+After entering the password to **bandit14**, the password to the next level should be displayed in the terminal.
+
+### Key Commands
+- **nc**
