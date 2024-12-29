@@ -427,3 +427,81 @@ The decoded password should now be displayed in the terminal.
 ### Key Commands
 - **tr**
 
+## Level 12-13
+### Level Goal
+The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed. For this level it may be useful to create a directory under /tmp in which you can work. Use mkdir with a hard to guess directory name. Or better, use the command “mktemp -d”. Then copy the datafile using cp, and rename it using mv (read the manpages!)
+### Solution
+Connect to the next level through `ssh` by using the following command:
+
+```bash
+ssh bandit11@bandit.labs.overthewire.org -p 2220
+```
+You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-11-12)
+
+As advised in the level description, I used the `mkdir` command to create a directory within the `/tmp` folder.
+
+```bash
+mkdir /tmp/tmpdir
+```
+
+I then copied the **data.txt** file over to the new directory using the `cp` command like so:
+
+```bash
+cp data.txt /tmp/tmpdir
+```
+
+I used the `xxd` command with the `-r` option to revert the hexdump change that was previously done. You must also state what the new file generated should be called like so:
+
+```bash
+xxd -r data.txt data1.txt
+```
+
+I then used the `file` command to figure out what the filetype of this new file is.
+
+```bash
+file data1.txt
+```
+
+The output indicated that this was compressed through **gzip**. To decompress a gzip file, you must first use the `mv` command to rename it with the `.gz` extension.
+
+```bash
+mv data1.txt data1.gz
+```
+Now you can decompress by using the `gunzip` command like so:
+
+```bash
+gunzip data1.gz
+```
+You'll be left with a file named `data1`. Use the `file` command once more to determine what the file type is. 
+
+This new file has been compressed through **bzip2**. To decompress a bzip2 file, you must first use the `mv` command to rename it with the `bz2` extension.
+
+```bash
+mv data1 data2.bz2
+```
+I'm adjusting the file number by 1 each team I rename it to clearly indicate that I've moved on to the next decompression. Now you can decompress by using the `bunzip2` command.
+
+```bash
+bunzip2 data2.bz2
+```
+Repeat the previous steps a couple more times as the next few compressed files are either `gzip` or `bzip2`. You must ensure that you're using the `file` command to identify what is the correct decompression method to use.
+
+You'll soon be met with a file that is a **tar archive**. The `tar -xvf` command is used to extract files from a tar archive. The `-x` option specifies extraction, `-v` enables verbose mode to display the files being extracted, and `-f` indicates that the next argument is the name of the archive file. Together, these options make it easy to unpack and view the contents of a tar archive. The command should look like this (adjust the command to match the filename you have):
+
+```bash
+tar -xvf data5
+```
+The output will be have the `.bin` extension. Use the `file` command once more to verify the file type and use the necessary extraction method until you reach a file that is **ASCII text**. Once identified, use the `cat` command to retrieve the password.
+
+### Key Commands
+- **xxd**
+- **mkdir**
+- **cp**
+- **file**
+- **mv**
+- **gunzip**
+- **bunzip2**
+- **tar**
+
+
+
