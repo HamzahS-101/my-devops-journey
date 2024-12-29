@@ -549,7 +549,7 @@ Connect to the next level through `ssh` by using the following command:
 ```bash
 ssh bandit14@bandit.labs.overthewire.org -p 2220
 ```
-You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-13-14)
+You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-13-14).
 
 To retrieve the password for the next level, use the `nc` command to connect to **port 30000** on **localhost**, then submit the password for the current level when prompted.
 
@@ -560,3 +560,25 @@ After entering the password to **bandit14**, the password to the next level shou
 
 ### Key Commands
 - **nc**
+
+## Level 15-16
+### Level Goal
+The password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using SSL/TLS encryption.
+### Solution
+Connect to the next level through `ssh` by using the following command:
+
+```bash
+ssh bandit15@bandit.labs.overthewire.org -p 2220
+```
+You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-14-15).
+
+I used the `openssl s_client` command to establish a **secure SSL/TLS connection**. I included the `-connect` option followed by the hostname and port `(localhost:30001)` to specify the connection details. I included the -connect option followed by the hostname and port (localhost:30001) to specify the connection details. The command should look like this:
+
+```bash
+openssl s_client -connect localhost:30001
+```
+After entering the password to the current level, the password to the next level was displayed.
+
+### Key Commands
+- **openssl s_client**
+
