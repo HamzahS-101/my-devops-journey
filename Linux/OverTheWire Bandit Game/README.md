@@ -382,3 +382,24 @@ This will output the line containing the `=` characters as well as the password 
 - **strings**
 - **grep**
 
+## Level 10-11
+### Level Goal
+The password for the next level is stored in the file data.txt, which contains base64 encoded data.
+### Solution
+Connect to the next level through `ssh` by using the following command:
+
+```bash
+ssh bandit10@bandit.labs.overthewire.org -p 2220
+```
+You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-9-10)
+
+For this level, I used the `base64` command with the `-d` option to decode the **base64 encoded data** which should revert it back to its original text form. The command should look like this:
+
+```bash
+base64 -d data.txt
+```
+The text should now be decoded back to its original format and the password should be displayed.
+
+### Key Commands
+- **base64**
+
