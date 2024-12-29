@@ -329,7 +329,7 @@ The password for the next level should now be displayed in the terminal, alongsi
 
 ## Level 8-9
 ### Level Goal
-The password for the next level is stored in the file data.txt and is the only line of text that occurs only once
+The password for the next level is stored in the file data.txt and is the only line of text that occurs only once.
 ### Solution
 Connect to the next level through `ssh` by using the following command:
 
@@ -353,4 +353,32 @@ sort data.txt | uniq -u
 ### Key Commands
 - **sort**
 - **uniq**
+
+## Level 9-10
+### Level Goal
+The password for the next level is stored in the file data.txt in one of the few human-readable strings, preceded by several ‘=’ characters.
+### Solution
+Connect to the next level through `ssh` by using the following command:
+
+```bash
+ssh bandit9@bandit.labs.overthewire.org -p 2220
+```
+You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-8-9)
+
+I used the `strings` command to identify the human-readable lines within the `data.txt` file. 
+
+```bash
+strings data.txt
+```
+
+Next I used the `grep` command to identify the line which contains the several `=` characters that precede the password. The output from the previous command should be piped into the `grep` command like so:
+
+```bash
+strings data.txt | grep "===="
+```
+This will output the line containing the `=` characters as well as the password to the next level.
+
+### Key Commands
+- **strings**
+- **grep**
 
