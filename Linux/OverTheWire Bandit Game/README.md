@@ -403,3 +403,27 @@ The text should now be decoded back to its original format and the password shou
 ### Key Commands
 - **base64**
 
+## Level 11-12
+### Level Goal
+The password for the next level is stored in the file data.txt, where all lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions.
+### Solution
+Connect to the next level through `ssh` by using the following command:
+
+```bash
+ssh bandit11@bandit.labs.overthewire.org -p 2220
+```
+You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-10-11)
+
+A file encoded in **ROT13** format has its text shifted by 13 places in the alphabet, so each letter is replaced with the one 13 characters ahead or behind it, making it a simple substitution cipher. To decode it, you can use the `tr` command, which translates characters. 
+
+First, I used the `cat` command to display the encoded password, then piped it into the `tr` command, specifying the format to which the letters had been mapped.
+
+```bash
+cat data.txt | tr ‘a-zA-Z’ ‘n-za-mN-ZA-M’
+```
+
+The decoded password should now be displayed in the terminal.
+
+### Key Commands
+- **tr**
+
