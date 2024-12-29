@@ -115,9 +115,9 @@ ssh bandit2@bandit.labs.overthewire.org -p 2220
 ```
 You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-1-2).
 
-Once connected, use the `ls` command to confirm that the correct file is stored in our current directory.
+Once connected, I used the `ls` command to confirm that the correct file is stored in our current directory.
 
-Once confirmed, we'll use the `cat` command to print out the contents of the file. Since the filename contains spaces, the cat command won't work unless we enclose the name in quotation marks, as it will interpret each word as a separate filename. The command should look like this:
+Once confirmed, I used the `cat` command to print out the contents of the file. Since the filename contains spaces, the cat command won't work unless we enclose the name in quotation marks, as it will interpret each word as a separate filename. The command should look like this:
 
 ```bash
 cat "spaces in this filename"
@@ -148,7 +148,7 @@ The level description informs us that the file storing the password is in the `i
 cd inhere
 ```
 
-Now we'll use the `ls-a` command to list all files in the `inhere` directory including hidden ones. 
+Next I used the `ls-a` command to list all files in the `inhere` directory including hidden ones. 
 
 ```bash
 ls -a
@@ -160,8 +160,6 @@ The output should contain a file named `...Hiding-From-You`. We will now use the
 cat ...Hiding-From-You
 ```
 The password for the next level should now be displayed in the terminal.
-
-You can now use the `exit` command to return to the local shell and begin the next level.
 
 ### Key Commands
 - **cd**
@@ -215,7 +213,7 @@ The password for the next level is stored in a file somewhere under the inhere d
 - **1033 bytes in size**
 - **Not executable**
 ### Solution
-CConnect to the next level through `ssh` by using the following command:
+Connect to the next level through `ssh` by using the following command:
 
 ```bash
 ssh bandit5@bandit.labs.overthewire.org -p 2220
@@ -228,7 +226,7 @@ The level description informs us that the file storing the password is in the `i
 cd inhere
 ```
 
-We will now use the `find` command to search for the desired file using the parameters mentioned in the level description. To get a better understanding of the options for the `find` command, I referred to its man page. The `man` page  is a built-in Linux documentation system that provides detailed information about commands, including their usage, options, and syntax. You can access it by typing `man` followed by the command you want to search.
+I used the `find` command to search for the desired file using the parameters mentioned in the level description. To get a better understanding of the options for the `find` command, I referred to its man page. The `man` page  is a built-in Linux documentation system that provides detailed information about commands, including their usage, options, and syntax. You can access it by typing `man` followed by the command you want to search.
 
 ```bash
 man find
@@ -240,7 +238,7 @@ With this I was able to find the following options to help narrow my search:
 - `-size`: Allows you to specify the size of the file. I followed this with `1033c` which means it is 1033 bytes in size.
 - `-! -executable`: This is used to only output files that are not executable.
 
-With this information we can now use the following command to search for the file:
+With this information I used the following command to search for the file:
 
 ```bash
 find -type f -size 1033c ! -executable
@@ -251,7 +249,7 @@ This will output the path to the file which contains the password:
 ./maybehere07/.file2
 ```
 
-To confirm that the file is human readable, we can use the `file` command followed by the path to the file. 
+To confirm that the file is human readable, I used the `file` command followed by the path to the file. 
 
 ```bash
 file ./maybehere07/.file2 
@@ -259,14 +257,11 @@ file ./maybehere07/.file2
 
 The output was **ASCII text** which confirms it is human readable. 
 
-Lastly, we'll use the `cat` command followed by file path to obtain the password to the next level.
+Lastly, I used the `cat` command followed by the file path to obtain the password to the next level.
 
 ```bash
 cat ./maybehere07/.file2 
 ```
-The password for the next level should now be displayed in the terminal.
-
-You can now use the `exit` command to return to the local shell and begin the next level.
 
 ### Key Commands
 - **cd**
@@ -290,32 +285,72 @@ ssh bandit6@bandit.labs.overthewire.org -p 2220
 ```
 You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-5-6)
 
-We'll use the `find` command once more, however there are some additional options we can use that is found through the `man` page:
+I used the `find` command once more, however there are some additional options required that I found through the `man` page:
 
 - `-group`: Allows us to specify which group owns the file.
 - `-user`: Allows us to specify which user owns the file.
 
-We'll use these new options in the command so we can add the new criteria provided. Rather than using `cd` to navigate to our desired directory, we'll use `/` instead as this indicates that we are searching the entire system. Here's how the command will look:
+Rather than using `cd` to navigate to the desired directory, I used `/` instead as this indicates that we are searching the entire system. Here's how the command will look:
 
 ```bash
 find / -size 33c -group bandit6 -user bandit7
 ```
 
-This will locate the file containing the password. We'll now use the `cat` command, followed by the path to the file to retrieve the password to the next level:
+This will locate the file containing the password. Next I used the `cat` command, followed by the path to the file to retrieve the password to the next level:
 
 ```bash
 cat /var/lib/dpkg/info/bandit7.password
 ```
 
-The password for the next level should now be displayed in the terminal.
-
-You can now use the `exit` command to return to the local shell and begin the next level.
-
 ### Key Commands
 - **find**
 - **cat**
 
+## Level 7-8
+### Level Goal
+The password for the next level is stored in the file data.txt next to the word millionth.
+### Solution
+Connect to the next level through `ssh` by using the following command:
 
+```bash
+ssh bandit7@bandit.labs.overthewire.org -p 2220
+```
+You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-6-7)
 
+For this level I used the `grep` command. The `grep` command is used to search for specific patterns or text within files, displaying lines that match the given criteria. The command should be as follows:
 
+```bash
+grep "millionth" data.txt
+```
+The password for the next level should now be displayed in the terminal, alongside the word `"millionth"`.
+
+### Key Commands
+- **grep**
+
+## Level 8-9
+### Level Goal
+The password for the next level is stored in the file data.txt and is the only line of text that occurs only once
+### Solution
+Connect to the next level through `ssh` by using the following command:
+
+```bash
+ssh bandit8@bandit.labs.overthewire.org -p 2220
+```
+You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-7-8)
+
+The first command I used was the `sort` command. This sort the lines within `data.txt` and group all identical lines.
+
+```bash
+sort data.txt
+```
+
+To find the line that appears only once, I used the `uniq` command with the `-u` option. By piping the output of the previous command to the `uniq -u` command, I was able to reveal the line containing the password. The command should look like this:
+
+```bash
+sort data.txt | uniq -u
+```
+
+### Key Commands
+- **sort**
+- **uniq**
 
