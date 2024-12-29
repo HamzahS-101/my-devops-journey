@@ -434,7 +434,7 @@ The password for the next level is stored in the file data.txt, which is a hexdu
 Connect to the next level through `ssh` by using the following command:
 
 ```bash
-ssh bandit11@bandit.labs.overthewire.org -p 2220
+ssh bandit12@bandit.labs.overthewire.org -p 2220
 ```
 You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-11-12)
 
@@ -491,7 +491,7 @@ You'll soon be met with a file that is a **tar archive**. The `tar -xvf` command
 ```bash
 tar -xvf data5
 ```
-The output will be have the `.bin` extension. Use the `file` command once more to verify the file type and use the necessary extraction method until you reach a file that is **ASCII text**. Once identified, use the `cat` command to retrieve the password.
+The output will have the `.bin` extension. Continue to use the `file` command to verify the file type and use the necessary extraction method until you reach a file that is **ASCII text**. Once identified, use the `cat` command to retrieve the password.
 
 ### Key Commands
 - **xxd**
@@ -503,5 +503,40 @@ The output will be have the `.bin` extension. Use the `file` command once more t
 - **bunzip2**
 - **tar**
 
+## Level 13-14
+### Level Goal
+The password for the next level is stored in /etc/bandit_pass/bandit14 and can only be read by user bandit14. For this level, you don’t get the next password, but you get a private SSH key that can be used to log into the next level. Note: localhost is a hostname that refers to the machine you are working on.
+### Solution
+First we must use the `scp` command to securely copy the **private SSH key** that is stored in the home directory of **bandit13**. we'll use the `-P` option to specify the port as well as input the file path to the SSH key and the location in our local directory that we want to copy it over to.
+
+```bash
+scp -P 2220 bandit13@bandit.labs.overthewire.org:sshkey.private ~/Desktop/
+```
+
+The SSH key should now be stored in my Desktop. Before we use the key to connect to **bandit14** we must first adjust the permissions to **read only** the current permissions are too open. We can confirm the current permissions by using the `ls` command with the `-l` like so (ensure you're in the directory that you're running the search for):
+
+```bash
+ls -l
+```
+To change the permissions to read only for the owner, you can use the `chmod` command. The `chmod 400` command uses octal notation to set file permissions, granting the owner read-only access while removing write and execute permissions for the owner, group, and others.
+
+```bash
+chmod 400 sshkey.private
+```
+
+Now we'll use the `ssh` command with the `-i` option to securely connect to **bandit14** with the SSH private key.
+
+```bash
+ssh -i ~/Desktop/sshkey.private bandit14@bandit.labs.overthewire.org -p 2220
+```
+Now that we've securely connected, we can use the `cat` command to obtain the password which is stored in **/etc/bandit_pass/bandit14**
+
+```bash
+cat /etc/bandit_pass/bandit14
+```
+### Key Commands
+- **scp**
+- **chmod**
+- **ssh -i**
 
 
