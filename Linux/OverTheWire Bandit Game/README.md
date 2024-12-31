@@ -140,7 +140,7 @@ Connect to the next level through `ssh` by using the following command:
 ```bash
 ssh bandit3@bandit.labs.overthewire.org -p 2220
 ```
-You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-2-3)
+You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-2-3).
 
 The level description informs us that the file storing the password is in the `inhere` directory. We can navigate to that directory by using the `cd` command.
 
@@ -175,7 +175,7 @@ Connect to the next level through `ssh` by using the following command:
 ```bash
 ssh bandit4@bandit.labs.overthewire.org -p 2220
 ```
-You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-3-4)
+You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-3-4).
 
 The level description informs us that the file storing the password is in the `inhere` directory. We can navigate to that directory by using the `cd` command.
 
@@ -218,7 +218,7 @@ Connect to the next level through `ssh` by using the following command:
 ```bash
 ssh bandit5@bandit.labs.overthewire.org -p 2220
 ```
-You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-4-5)
+You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-4-5).
 
 The level description informs us that the file storing the password is in the `inhere` directory. We can navigate to that directory by using the `cd` command.
 
@@ -283,7 +283,7 @@ Connect to the next level through `ssh` by using the following command:
 ```bash
 ssh bandit6@bandit.labs.overthewire.org -p 2220
 ```
-You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-5-6)
+You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-5-6).
 
 I used the `find` command once more, however there are some additional options required that I found through the `man` page:
 
@@ -315,7 +315,7 @@ Connect to the next level through `ssh` by using the following command:
 ```bash
 ssh bandit7@bandit.labs.overthewire.org -p 2220
 ```
-You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-6-7)
+You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-6-7).
 
 For this level I used the `grep` command. The `grep` command is used to search for specific patterns or text within files, displaying lines that match the given criteria. The command should be as follows:
 
@@ -336,7 +336,7 @@ Connect to the next level through `ssh` by using the following command:
 ```bash
 ssh bandit8@bandit.labs.overthewire.org -p 2220
 ```
-You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-7-8)
+You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-7-8).
 
 The first command I used was the `sort` command. This sort the lines within `data.txt` and group all identical lines.
 
@@ -363,7 +363,7 @@ Connect to the next level through `ssh` by using the following command:
 ```bash
 ssh bandit9@bandit.labs.overthewire.org -p 2220
 ```
-You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-8-9)
+You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-8-9).
 
 I used the `strings` command to identify the human-readable lines within the `data.txt` file. 
 
@@ -391,7 +391,7 @@ Connect to the next level through `ssh` by using the following command:
 ```bash
 ssh bandit10@bandit.labs.overthewire.org -p 2220
 ```
-You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-9-10)
+You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-9-10).
 
 For this level, I used the `base64` command with the `-d` option to decode the **base64 encoded data** which should revert it back to its original text form. The command should look like this:
 
@@ -412,7 +412,7 @@ Connect to the next level through `ssh` by using the following command:
 ```bash
 ssh bandit11@bandit.labs.overthewire.org -p 2220
 ```
-You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-10-11)
+You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-10-11).
 
 A file encoded in **ROT13** format has its text shifted by 13 places in the alphabet, so each letter is replaced with the one 13 characters ahead or behind it, making it a simple substitution cipher. To decode it, you can use the `tr` command, which translates characters. 
 
@@ -436,7 +436,7 @@ Connect to the next level through `ssh` by using the following command:
 ```bash
 ssh bandit12@bandit.labs.overthewire.org -p 2220
 ```
-You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-11-12)
+You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-11-12).
 
 As advised in the level description, I used the `mkdir` command to create a directory within the `/tmp` folder.
 
@@ -581,4 +581,56 @@ After entering the password to the current level, the password to the next level
 
 ### Key Commands
 - **openssl s_client**
+
+## Level 16-17
+### Level Goal
+The credentials for the next level can be retrieved by submitting the password of the current level to a port on localhost in the range 31000 to 32000. First find out which of these ports have a server listening on them. Then find out which of those speak SSL/TLS and which don’t. There is only 1 server that will give the next credentials, the others will simply send back to you whatever you send to it.
+### Solution
+Connect to the next level through `ssh` by using the following command:
+
+```bash
+ssh bandit16@bandit.labs.overthewire.org -p 2220
+```
+You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-15-16).
+
+To solve this challenge, I used the `nmap` command which is a network scanning tool used to discover hosts and services on a network. I paired this with the `-sV` option which probes open ports to determine what service is running on each port (e.g. echo) as well as the version. I also used the `-p` option to specify the range of ports to scan. The complete command should look like this:
+
+```bash
+nmap -sV -p 31000-32000 localhost
+```
+
+The output contained a few open ports with varying services. The one required to progress was **port 31790** as that was the only one which didn't contain `echo` as a service. 
+
+I then used the `ncat` command paired with the `-ssl` option to establish a **secure SSL/TLS connection** to the necessary port on the localhost.
+
+```bash
+ncat -ssl localhost 31790
+```
+
+After entering the current level's password, I was met with an SSH private key which could be used to access the next level. I copied the contents and exited the SSH connection using the `exit` command. I then pasted it to a file I created using `vim`.
+
+The file permissions had to be adjusted in order to restrict read access only to the file owner.
+
+```bash
+chmod 400 sshkey17.private
+```
+I then used the `ssh` command with the `-i` option to connect to **bandit17** with this newly created SSH private key.
+
+```bash
+ssh -i ~/sshkey17.private bandit17@bandit.labs.overthewire.org -p 2220
+```
+
+Once connected, I used the `cat` command to output the password to this level which is stored in the file located at `etc/bandit_pass/bandit17`:
+
+```bash
+cat etc/bandit_pass/bandit17
+```
+
+### Key Commands
+- **nmap**
+- **ncat**
+- **vim**
+- **chmod**
+- **ssh -i**
+
 
