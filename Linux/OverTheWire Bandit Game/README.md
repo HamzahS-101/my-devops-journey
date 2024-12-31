@@ -633,4 +633,39 @@ cat etc/bandit_pass/bandit17
 - **chmod**
 - **ssh -i**
 
+## Level 17-18
+### Level Goal
+There are 2 files in the homedirectory: passwords.old and passwords.new. The password for the next level is in passwords.new and is the only line that has been changed between passwords.old and passwords.new.
+### Solution
+Connect to the next level through `ssh` by using the following command:
+
+```bash
+ssh bandit17@bandit.labs.overthewire.org -p 2220
+```
+You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-16-17).
+
+The `diff` command alongside the `--suppress-common-lines` option are used to identify differences between files whilst suppressing lines that are common. Here's how the command should look:
+
+```bash
+diff --suppress-common-lines passwords.new passwords.old
+```
+This displayed the only line that had been changed which is the password to the next level.
+
+### Key Commands
+- **diff**
+
+## Level 18-19
+### Level Goal
+The password for the next level is stored in a file readme in the homedirectory. Unfortunately, someone has modified .bashrc to log you out when you log in with SS
+### Solution
+Since we cannot SSH directly into **bandit18**, I added the `cat` command to the end of the `ssh` command in order to read the file containing the password. It allows me to do this without kicking me off the SSH connection. The command should look like so:
+
+```bash
+ssh bandit18@bandit.labs.overthewire.org -p 2220 cat readme
+```
+After entering the password to **bandit18**, the password to the next level should be displayed.
+
+### Key Commands
+- **ssh**
+- **cat**
 
