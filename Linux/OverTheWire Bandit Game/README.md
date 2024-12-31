@@ -656,7 +656,7 @@ This displayed the only line that had been changed which is the password to the 
 
 ## Level 18-19
 ### Level Goal
-The password for the next level is stored in a file readme in the homedirectory. Unfortunately, someone has modified .bashrc to log you out when you log in with SS
+The password for the next level is stored in a file readme in the homedirectory. Unfortunately, someone has modified .bashrc to log you out when you log in with SSH.
 ### Solution
 Since we cannot SSH directly into **bandit18**, I added the `cat` command to the end of the `ssh` command in order to read the file containing the password. It allows me to do this without kicking me off the SSH connection. The command should look like so:
 
@@ -667,5 +667,27 @@ After entering the password to **bandit18**, the password to the next level shou
 
 ### Key Commands
 - **ssh**
+- **cat**
+
+## Level 19-20
+### Level Goal
+To gain access to the next level, you should use the setuid binary in the homedirectory. Execute it without arguments to find out how to use it. The password for this level can be found in the usual place (/etc/bandit_pass), after you have used the setuid binary.
+### Solution
+Connect to the next level through `ssh` by using the following command:
+
+```bash
+ssh bandit19@bandit.labs.overthewire.org -p 2220
+```
+You'll be prompted to enter the password. This was the password we obtained on the [previous level](#level-18-19).
+
+**A Set User ID (SetUID) binary** is a type of file that, when executed, runs with the privileges of the file's owner rather than the user who executes it. Since the file containing the password **(/etc/bandit_pass/bandit20)** is owned by **bandit20**, I executed the file and followed it with the `cat` command in order to display the contents of the file.
+
+```bash
+./bandit20-do cat  /etc/bandit_pass/bandit20
+```
+
+This ran the `cat` command as if I was **bandit20**, allowing me to retrieve the password to the next level.
+
+### Key Commands
 - **cat**
 
