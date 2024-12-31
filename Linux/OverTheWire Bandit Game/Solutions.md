@@ -1,5 +1,29 @@
 # OverTheWire Bandit Game Solutions (Levels 1-20)
 
+## Table of Contents
+- [Introduction](#introduction)
+- [Level 0](#level-0)
+- [Level 0-1](#level-0-1)
+- [Level 1-2](#level-1-2)
+- [Level 2-3](#level-2-3)
+- [Level 3-4](#level-3-4)
+- [Level 4-5](#level-4-5)
+- [Level 5-6](#level-5-6)
+- [Level 6-7](#level-6-7)
+- [Level 7-8](#level-7-8)
+- [Level 8-9](#level-8-9)
+- [Level 9-10](#level-9-10)
+- [Level 10-11](#level-10-11)
+- [Level 11-12](#level-11-12)
+- [Level 12-13](#level-12-13)
+- [Level 13-14](#level-13-14)
+- [Level 14-15](#level-14-15)
+- [Level 15-16](#level-15-16)
+- [Level 16-17](#level-16-17)
+- [Level 17-18](#level-17-18)
+- [Level 18-19](#level-18-19)
+- [Level 19-20](#level-19-20)
+
 ## Introduction
 The **OverTheWire Bandit game** is a fun and challenging way to learn core Linux commands and concepts through hands-on problem-solving. It consists of a series of levels, where each level requires you to solve a challenge using different Linux tools and techniques. It's a great resource for beginners to get comfortable with the Linux environment in a safe and engaging way.
 
