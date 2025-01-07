@@ -1,4 +1,4 @@
-# my-devops-journey
+# My DevOps Journey
 Welcome to my DevOps Journey repository! This is a space where I will document my learning journey into the world of DevOps, including my personal notes, resources, and project documentation. Whether it's exploring foundational concepts or delving into advanced tools and practices, this repository serves as a centralised hub for everything I learn and create along the way.
 
 # What I'm Learning
