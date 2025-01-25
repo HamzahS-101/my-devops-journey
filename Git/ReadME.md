@@ -9,7 +9,7 @@ Git is a version control system that helps developers track changes, collaborate
 Git plays a crucial role in DevOps by enabling seamless collaboration, version control, and automation. It provides a central repository for code, allowing teams to share and integrate changes efficiently. By integrating with CI/CD pipelines, Git triggers automated testing, building, and deployment whenever code changes are pushed. This ensures faster, more reliable releases while maintaining high quality.
 
 
-Here are some key concepts and commands I've explored
+## Key Git concepts and commands
 
 
 ### Staging Changes  
