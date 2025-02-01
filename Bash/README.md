@@ -8,7 +8,7 @@ Bash (**B**ourne **A**gain **SH**ell) is a command-line shell and scripting lang
 
 Bash scripting is crucial for DevOps because it helps automate and streamline repetitive tasks, manage system configurations, and simplify the deployment process. It is a powerful tool for automating the configuration of environments, deploying applications, and managing server health. By using Bash, DevOps professionals can improve the efficiency of their workflows, reduce errors, and maintain a consistent and reliable infrastructure.
 
-## Learning Challenge Documentation
+## Bash Challenges
 
 This repository contains a collection of Bash scripting challenges I’ve worked through as part of my journey to learn Bash. Each challenge is documented with the steps I followed to solve the problem, the commands I used, and the lessons I learnt along the way.
 
