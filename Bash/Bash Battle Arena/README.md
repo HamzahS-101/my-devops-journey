@@ -1,5 +1,23 @@
 # Bash Battle Arena 🎮
 
+## Table of Contents
+- [Overview](#overview)
+- [Level 1](#level-1-the-basics)
+- [Level 2](#level-2-variables-and-loops)
+- [Level 3](#level-3-conditional-statements)
+- [Level 4](#level-4-file-manipulation)
+- [Level 5](#level-5-the-boss-battle---combining-basics)
+- [level 6](#level-6-argument-parsing)
+- [Level 7](#level-7-file-sorting-script)
+- [Level 8](#level-8-multi-file-searcher)
+- [Level 9](#level-9-script-to-monitor-directory-changes)
+- [Level 10](#level-10-boss-battle-2---intermediate-scripting)
+- [Level 11](#level-11-automated-disk-space-report)
+- [Level 12](#level-12-simple-configuration-file-parser)
+- [Level 13](#level-13-backup-script-with-rotation)
+- [Level 14](#level-14-user-friendly-menu-script)
+- [Level 15](#level-15-boss-battle-3---advanced-scripting)
+
 ## Overview
 
 The "Bash Battle Arena" is a fun and interactive command-line game designed to teach and improve Bash scripting skills. Each level in the game presents a unique challenge that requires players to write Bash scripts to solve problems ranging from simple file manipulations to more complex system operations. As players progress through the levels, they gradually learn new Bash concepts and best practices.
