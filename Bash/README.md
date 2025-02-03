@@ -12,6 +12,6 @@ Bash scripting is crucial for DevOps because it helps automate and streamline re
 
 This repository contains a collection of Bash scripting challenges I’ve worked through as part of my journey to learn Bash. Each challenge is documented with the steps I followed to solve the problem, the commands I used, and the lessons I learnt along the way.
 
-By completing these challenges, I practiced various Bash techniques such as file manipulation, loops, conditionals, and regular expressions, which are all vital skills for a DevOps engineer.
+By completing these challenges, I practiced various Bash techniques such as file manipulation, loops and conditionals which are all vital skills for a DevOps engineer.
 
 Feel free to check out the documentation for each challenge to see how I approached and solved different problems using Bash scripting.
