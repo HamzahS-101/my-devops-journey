@@ -458,7 +458,7 @@ echo "1. Check disk space"
 echo "2. List running processes"
 echo "3. Check current shell"
 
-read -rp "Enter your choice [1-3]: " choice
+read -p "Enter your choice [1-3]: " choice
 
 case $choice in
     1) df -h ;;
@@ -475,7 +475,7 @@ esac
   - Option 2: List running processes
   - Option 3: Check current shell
   
-- The `read -rp` command prompts the user to enter a choice, storing their input in the `choice` variable.
+- The `read -p` command prompts the user to enter a choice, storing their input in the `choice` variable.
 
 - The `case` statement evaluates the user's input and runs the corresponding command:
   - `df -h`: Displays disk space usage in a human-readable format if the user chooses option 1.
@@ -508,7 +508,7 @@ echo "2. Show system uptime"
 echo "3. Backup the Arena directory and keep the last 3 backups"
 echo "4. Parse a configuration file settings.conf and display the values"
 
-read -rp "Enter your choice [1-4]: " choice
+read -p "Enter your choice [1-4]: " choice
 
 case $choice in
     1)  df -h ;;
@@ -532,7 +532,7 @@ case $choice in
             done
         else
             echo "There are fewer than 3 backups, no files will be deleted."
-        fi
+        fi ;;
     4)  if [ ! -f "$conf" ]; then
             echo "Configuration file does not exist."
             exit 1
@@ -552,7 +552,7 @@ esac
   - Option 3: Backup the Arena directory and keep the last 3 backups
   - Option 4: Parse a configuration file (`settings.conf`) and display the key-value pairs
 
-- The `read -rp` command prompts the user to enter their choice, which is stored in the `choice` variable.
+- The `read -p` command prompts the user to enter their choice, which is stored in the `choice` variable.
 
 - The `case` statement processes the user’s input and executes the corresponding task:
   - **Option 1**: Runs `df -h` to display disk space in a human-readable format.
