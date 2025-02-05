@@ -29,4 +29,4 @@ for file in "$dir"/*; do
     fi
 done
 
-echo "Files have been organized!"
+echo "Files have been organised!"
