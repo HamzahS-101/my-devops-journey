@@ -17,7 +17,7 @@ Git plays a crucial role in DevOps by enabling seamless collaboration, version c
 
 ### Committing Changes  
 - **`git commit`**: Saves staged changes to the repository.  
-  - Used with `-m` to include clear, meaningful commit messages that explain *why* the changes were made rather than just *what* was changed.  
+  - Used with `-m` to include clear, meaningful commit messages that explain what changes have been made.  
 
 ### Pushing Changes  
 - **`git push`**: Uploads committed changes from the local repository to a remote repository.  
