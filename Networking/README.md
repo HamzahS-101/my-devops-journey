@@ -11,10 +11,10 @@ For **DevOps engineers**, networking knowledge is crucial for:
 
 ## Key Networking Topics  
 This directory contains notes, scripts, and exercises covering:  
-✅ **Networking Basics** – OSI model, TCP/IP, DNS, DHCP  
-✅ **Subnetting & CIDR** – Calculating and designing efficient IP addressing  
-✅ **Firewalls & Security** – Understanding ports, protocols, and access control  
-✅ **Cloud Networking** – VPCs, security groups, NAT, and load balancing  
-✅ **Troubleshooting** – Using `ping`, `traceroute`, `netstat`, and `tcpdump`  
+- **Networking Basics** – OSI model, TCP/IP, DNS, DHCP  
+- **Subnetting & CIDR** – Calculating and designing efficient IP addressing  
+- **Firewalls & Security** – Understanding ports, protocols, and access control  
+- **Cloud Networking** – VPCs, security groups, NAT, and load balancing  
+- **Troubleshooting** – Using `ping`, `traceroute`, `netstat`, and `tcpdump`  
 
  
