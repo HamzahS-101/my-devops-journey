@@ -35,22 +35,32 @@ systemctl start nginx
 
 Next, I adjusted the security group generated for the EC2 instance to allow inbound traffic on **port 22** for **SSH** access and **port 80** for **HTTP** traffic, ensuring that the NGINX web server would be accessible via the browser.
 
+![Security Group](Images/security-group.png)
+
 
 ### 5. Tested with Public IP
 
 After waiting a few minutes for NGINX to complete its installation, I tested the setup by accessing the EC2 instance's public IP address in a web browser. This allowed me to confirm that NGINX was successfully running and serving the default NGINX welcome page.
 
+![Public IP](Images/public-ip.png)
+
 ### 6. Adding A Record to Cloudflare
 
 Next, I added an **A record** in Cloudflare to point to the EC2 instance using its public IP address. I set the record up as `nginx.hamzahsahal.com`, which allowed me to access the NGINX server through my custom domain.
+
+![A Record](Images/A-Record.png)
 
 ### 7. Testing with Custom Domain
 
 After setting up the A record, I tested the custom domain `nginx.hamzahsahal.com` to ensure it was working correctly. After a brief wait for DNS propagation, I was able to access the NGINX default page through the domain, confirming that everything was set up properly.
 
+![Confirmation](Images/finished-product.png)
+
 ### 8. Verifying DNS Configuration with dig Command
 
 To confirm that the domain was correctly pointing to my EC2 instance, I used the command `dig nginx.hamzahsahal.com +short`. This returned the public IP address of my instance, verifying that the DNS setup was correct and the domain was properly resolving to the NGINX server.
+
+![Dig](Images/dig-confirmation.png)
 
 ## Conclusion
 
