@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this mini-project, I’m combining my recent learnings of Networking, AWS, and Bash to set up a simple NGINX server on an EC2 instance. Using EC2’s user-data feature, I automated the installation and configuration of NGINX. Additionally, I’ve pointed the server to a custom domain I created, making it accessible over the internet.
+In this mini-project, I’m combining my recent learnings of Networking, AWS, and Bash to run NGINX on an EC2 instance. Using EC2’s user-data feature, I automated the installation and configuration of NGINX. Additionally, I’ve pointed the server to a custom domain I created, making it accessible over the internet.
 
 This project demonstrates how different technologies come together to build a functioning web server, providing a solid foundation for future DevOps and cloud-based applications.
 
