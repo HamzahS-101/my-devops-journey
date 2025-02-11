@@ -23,12 +23,12 @@ I then added all the required commands to a script, which I placed in the EC2 in
 ```bash
 #!/bin/bash
 
-yum update -y
+sudo yum update -y
 
-yum install -y nginx
+sudo yum install -y nginx
 
-systemctl enable nginx
-systemctl start nginx
+sudo systemctl enable nginx
+sudo systemctl start nginx
 ```
 
 ### 4. Adjust Security Group
