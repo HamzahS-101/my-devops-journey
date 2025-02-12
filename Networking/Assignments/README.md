@@ -40,7 +40,7 @@ Next, I adjusted the security group generated for the EC2 instance to allow inbo
 
 ### 5. Tested with Public IP
 
-After waiting a few minutes for NGINX to complete its installation, I tested the setup by accessing the EC2 instance's public IP address in a web browser. This allowed me to confirm that NGINX was successfully running and serving the default NGINX welcome page.
+After waiting a few minutes for NGINX to complete its installation, I tested the setup by entering the EC2 instance's public IP address in a web browser. This allowed me to confirm that NGINX was successfully running and serving the default NGINX welcome page.
 
 ![Public IP](Images/public-ip.png)
 
