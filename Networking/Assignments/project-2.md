@@ -2,12 +2,12 @@
 
 ## Table of Contents
 - [Project Brief](#project-brief) 
-- [Backend Infrastructure Configuration](#ec2-instance-and-security-group-setup-for-backend-infrastructure)
+- [Backend Infrastructure Configuration](#backend-infrastructure-configuration)
 - [Reverse Proxy Configuration](#reverse-proxy-configuration)
 - [Failover Reverse-Proxy Configuration](#failover-reverse-proxy-configuration)
 - [Configuring the Main Traffic Instance ](#configuring-the-main-traffic-instance)
 - [SSL Configuration](#ssl-configuration)
--[Setting Up a Status Page for Instance Health Monitoring](#setting-up-a-status-page-for-instance-health-monitoring)
+- [Setting Up a Status Page for Instance Health Monitoring](#setting-up-a-status-page-for-instance-health-monitoring)
 
 ## Project Brief
 
@@ -107,6 +107,9 @@ sudo systemctl restart nginx
 
 I then tested access to `app.hamzahsahal.com` over HTTP. By refreshing the page, I observed different layouts being served, confirming that the load balancing was working as expected and requests were being properly forwarded to the backend servers.
 
+![Backend 1](Images/backend-1.png)
+![Backend 2](Images/backend-2.png)
+
 
 ## Failover Reverse-Proxy Configuration
 
@@ -157,10 +160,9 @@ I then generated the SSL certificate using Certbot with the following command:
 ```bash
 sudo certbot certonly --standalone -d app.hamzahsahal.com
 ```
-The certificate and key files were saved at the following locations:
+The output will contain the location of the certificates.
 
-- Certificate: `/etc/letsencrypt/live/app.hamzahsahal.com/fullchain.pem`
-- Private Key: `/etc/letsencrypt/live/app.hamzahsahal.com/privkey.pem`
+
 
 ### Configuring the .conf File for SSL and Reverse Proxy Redirection
 
@@ -170,7 +172,7 @@ Here’s the breakdown of how the NGINX configuration file is structured for the
 1. **Upstream Block**  
    This block defines the reverse proxies and their failover behavior.
 
-   ```bash
+```bash
     upstream reverseproxy {
     # Main reverse proxy server
     server main-reverse-proxy-private-ip max_fails=3 fail_timeout=5s;
@@ -178,7 +180,7 @@ Here’s the breakdown of how the NGINX configuration file is structured for the
     # Backup reverse proxy server
     server backup-reverse-proxy-private-ip backup;
     }
-    ```
+```
 **Purpose:**
 
 - The upstream block defines two reverse proxy servers: the main reverse proxy and the backup reverse proxy.
@@ -210,8 +212,8 @@ server {
     listen 443 ssl;
     server_name app.hamzahsahal.com;
 
-    ssl_certificate /etc/letsencrypt/live/app.hamzahsahal.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/app.hamzahsahal.com/privkey.pem;
+    ssl_certificate /path/to/fullchain.pem;
+    ssl_certificate_key /path/to/privkey.pem;
 
     location / {
         proxy_pass http://reverseproxy;
@@ -248,8 +250,8 @@ server {
     listen 443 ssl;
     server_name app.hamzahsahal.com;
 
-    ssl_certificate /etc/letsencrypt/live/app.hamzahsahal.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/app.hamzahsahal.com/privkey.pem;
+    ssl_certificate /path/to/fullchain.pem;
+    ssl_certificate_key /path/to/privkey.pem;
 
     location / {
         proxy_pass http://reverseproxy;
@@ -296,7 +298,7 @@ To keep track of the health of both the reverse proxy and backend servers, I set
 
 ### Script Creation to Check the Status
 
-The script I created checks the health status of both the reverse proxy and backend servers. It defines two arrays: one for the reverse proxy servers and one for the backend servers. For each server, the script attempts to make a request using `curl` to determine if the server is online by checking for an HTTP 200 OK response.
+The script I created checks the health status of both the reverse proxy and backend servers. It defines two arrays: one for the reverse proxy servers and one for the backend servers. For each server, the script attempts to make a request using `curl` to determine if the server is online by checking for an `HTTP 200 OK`response.
 
 The results are then displayed in an HTML format, with the server name and its status (either "ONLINE" or "OFFLINE") clearly presented. The status page is styled with basic CSS to make it more readable and visually appealing.
 
@@ -461,8 +463,8 @@ server {
     listen 443 ssl;
     server_name status.hamzahsahal.com;
 
-    ssl_certificate /etc/letsencrypt/live/status.hamzahsahal.com/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/status.hamzahsahal.com/privkey.pem;
+    ssl_certificate /path/to/fullchain.pem;
+    ssl_certificate_key path/to/privkey.pem;
 
     location / {
         root /usr/share/nginx/html;
@@ -474,6 +476,10 @@ server {
 ### Testing the Status Page
 
 Once you've made the necessary changes, test the setup by visiting `https://status.hamzahsahal.com`. You should see the status page displaying the current status of both the reverse proxy and backend servers, along with their respective online or offline status. If everything is configured correctly, the page should be updated every minute based on the cron job you've set up.
+
+Below is an example of how it looked with the `main reverse proxy` offline.
+
+![Status](Images/status.png)
 
 
 
