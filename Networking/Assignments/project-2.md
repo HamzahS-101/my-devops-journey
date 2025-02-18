@@ -6,7 +6,7 @@
 - [Reverse Proxy Configuration](#reverse-proxy-configuration)
 - [Failover Reverse-Proxy Configuration](#failover-reverse-proxy-configuration)
 - [Configuring the Main Traffic Instance ](#configuring-the-main-traffic-instance)
-- [SSL Configuration](#ssl-configuration)
+- [SSL Configuration](#ssl-configuration-1)
 - [Setting Up a Status Page for Instance Health Monitoring](#setting-up-a-status-page-for-instance-health-monitoring)
 
 ## Project Brief
@@ -117,7 +117,7 @@ I then tested access to `app.hamzahsahal.com` over HTTP. By refreshing the page,
 
 The `nginx-reverse-proxy-backup` instance acts as a failover solution, ensuring continued availability if the main reverse proxy becomes unreachable.
 
-I used the user data method to automate the setup, following the same approach as with the previous instances for consistency and efficiency.
+I used the user data method to automate the setup, following the same approach as with the [previous instances](#backend-infrastructure-configuration) for consistency and efficiency.
 
 ### Configuring the Backup Reverse Proxy  
 
@@ -452,7 +452,7 @@ You will need to add an A record for `status.hamzahsahal.com` in Cloudflare, poi
 
 ### Creating the SSL Certificate for `status.hamzahsahal.com`
 
-To create the SSL certificate for `status.hamzahsahal.com`, use the same method as for the `app.hamzahsahal.com` domain, but with the appropriate domain name.
+To create the SSL certificate for `status.hamzahsahal.com`, use the [same method](#ssl-configuration-1) as for the `app.hamzahsahal.com` domain, but with the appropriate domain name.
 
 ### Editing the Conf File for the Main Traffic Server
 
@@ -477,7 +477,7 @@ server {
 
 Once you've made the necessary changes, test the setup by visiting `https://status.hamzahsahal.com`. You should see the status page displaying the current status of both the reverse proxy and backend servers, along with their respective online or offline status. If everything is configured correctly, the page should be updated every minute based on the cron job you've set up.
 
-Below is an example of how it looked with the `main reverse proxy` offline.
+Below is an example of how it looked when the `main reverse proxy` offline.
 
 ![Status](Images/status.png)
 
