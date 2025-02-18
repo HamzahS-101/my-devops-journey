@@ -8,6 +8,7 @@
 - [Configuring the Main Traffic Instance ](#configuring-the-main-traffic-instance)
 - [SSL Configuration](#ssl-configuration-1)
 - [Setting Up a Status Page for Instance Health Monitoring](#setting-up-a-status-page-for-instance-health-monitoring)
+- [Additional Security Measures](#additional-security-measures)
 
 ## Project Brief
 
@@ -41,7 +42,7 @@ To set up a highly available web infrastructure that includes multiple backend s
 
 ### Setting up the Instances
 
-I set up three **t2.micro** instances on AWS, each running **Nginx**. These instances were configured using a **user-data** script that automates the installation and startup of NGINX upon instance launch. The script ensures that NGINX is installed, enabled, and running by executing the following commands:  
+I set up three **t2.micro** instances on AWS, each running **NGINX**. These instances were configured using a **user-data** script that automates the installation and startup of NGINX upon instance launch. The script ensures that NGINX is installed, enabled, and running by executing the following commands:  
 
 ```bash
 #!/bin/bash
@@ -59,7 +60,7 @@ I adjusted the security groups for the instances to allow SSH (port 22) and HTTP
 
 ### Customising Backend Server Layout (Optional)
 
-As an optional setting, I modified the layout of each backend Nginx server by editing the `/usr/share/nginx/html/index.html` file. This change was made to visually differentiate the two servers (nginx and nginx-2) and confirm that the reverse proxy load balancer is correctly distributing traffic between them.
+As an optional setting, I modified the layout of each backend NGINX server by editing the `/usr/share/nginx/html/index.html` file. This change was made to visually differentiate the two servers (nginx and nginx-2) and confirm that the reverse proxy load balancer is correctly distributing traffic between them.
 
 ## Reverse Proxy Configuration  
 
@@ -67,7 +68,7 @@ As an optional setting, I modified the layout of each backend Nginx server by ed
 To begin, I configured an **A-Record** for the domain `app.hamzahsahal.com`, pointing it to the public IP of the **nginx-reverse-proxy** instance. This ensures that requests to `app.hamzahsahal.com` are directed to the reverse proxy server.  
 
 ### Editing the Reverse Configuration  
-Next, I modified the **Nginx configuration file** located at `/etc/nginx/nginx.conf`.
+Next, I modified the **NGINX configuration file** located at `/etc/nginx/nginx.conf`.
 
 
 The key changes included:  
@@ -99,7 +100,7 @@ http {
 
 ### Testing HTTP Access
 
-After saving the configuration, I restarted Nginx using:
+After saving the configuration, I restarted NGINX using:
 
 ```bash
 sudo systemctl restart nginx
@@ -477,10 +478,31 @@ server {
 
 Once you've made the necessary changes, test the setup by visiting `https://status.hamzahsahal.com`. You should see the status page displaying the current status of both the reverse proxy and backend servers, along with their respective online or offline status. If everything is configured correctly, the page should be updated every minute based on the cron job you've set up.
 
-Below is an example of how it looked when the `main reverse proxy` offline.
+Below is an example of how it looked when the `main reverse proxy` was offline.
 
 ![Status](Images/status.png)
 
+## Additional Security Measures  
+
+To enhance security and ensure only necessary traffic flows between instances, **Security Groups** can be configured with strict **inbound rules**. Here’s how you can lock down access:  
+
+### 1. Restrict Public Access  
+- Allow **only HTTP (80) and HTTPS (443) traffic** from the public internet **to the main traffic instance**.  
+ 
+
+### 2. Secure Internal Communication  
+- Only allow traffic **from the main traffic instance** to the reverse proxy instances on **port 80/443**.  
+- Only allow traffic **from the reverse proxies** to the backend servers on **port 80/443**.  
+
+### 3. Lock Down SSH Access  
+- Restrict **SSH (port 22) access** to specific IPs (e.g., your office or VPN).  
+
+
+### 4. Implement NACLs for an Extra Layer of Security  
+- Use **Network ACLs (NACLs)** to enforce rules at the subnet level, blocking unwanted traffic before it even reaches the security group.  
+- Define **strict allow rules** for communication between different tiers (main traffic instance → reverse proxies → backend servers).  
+
+By enforcing these rules, the setup remains locked down, preventing unauthorised access while still ensuring necessary communication between components.
 
 
 
