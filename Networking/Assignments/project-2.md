@@ -1,3 +1,14 @@
+# High Availability Web Infrastructure with NGINX and SSL
+
+## Table of Contents
+- [Project Brief](#project-brief) 
+- [Backend Infrastructure Configuration](#ec2-instance-and-security-group-setup-for-backend-infrastructure)
+- [Reverse Proxy Configuration](#reverse-proxy-configuration)
+- [Failover Reverse-Proxy Configuration](#failover-reverse-proxy-configuration)
+- [Configuring the Main Traffic Instance ](#configuring-the-main-traffic-instance)
+- [SSL Configuration](#ssl-configuration)
+-[Setting Up a Status Page for Instance Health Monitoring](#setting-up-a-status-page-for-instance-health-monitoring)
+
 ## Project Brief
 
 ### Objective:
@@ -26,7 +37,7 @@ To set up a highly available web infrastructure that includes multiple backend s
   - The current status of the reverse proxy servers (main and backup).
 
 
-## EC2 Instance and Security Group Setup for Backend Infrastructure
+## Backend Infrastructure Configuration
 
 ### Setting up the Instances
 
@@ -70,8 +81,8 @@ The updated configuration looked like this:
 ```bash
 http {
     upstream backend {
-        server 172.31.25.240;
-        server 172.31.25.193;
+        server Backend-Server-1-IP;
+        server Backend-Server-2-IP;
     }
 
     server {
@@ -97,16 +108,13 @@ sudo systemctl restart nginx
 I then tested access to `app.hamzahsahal.com` over HTTP. By refreshing the page, I observed different layouts being served, confirming that the load balancing was working as expected and requests were being properly forwarded to the backend servers.
 
 
-## Deploying the Main Traffic Instance and Backup Reverse Proxy
+## Failover Reverse-Proxy Configuration
 
 ### Instance Creation
 
-For the two new instances, I created **main-traffic** and **nginx-reverse-proxy-backup.**
+The `nginx-reverse-proxy-backup` instance acts as a failover solution, ensuring continued availability if the main reverse proxy becomes unreachable.
 
-- The `main-traffic` instance serves as the primary entry point for all incoming requests. It distributes traffic to the main reverse proxy and, if necessary, fails over to the backup reverse proxy.
-- The `nginx-reverse-proxy-backup` instance acts as a failover solution, ensuring continued availability if the main reverse proxy becomes unreachable.
-
-I used the user data method to automate their setup, following the same approach as with the previous instances for consistency and efficiency.
+I used the user data method to automate the setup, following the same approach as with the previous instances for consistency and efficiency.
 
 ### Configuring the Backup Reverse Proxy  
 
