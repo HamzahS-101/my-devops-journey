@@ -368,10 +368,6 @@ To enhance our application and introduce load balancing, we'll integrate Nginx a
 
             location / {
                 proxy_pass http://flask_app;
-                proxy_set_header Host $host;
-                proxy_set_header X-Real-IP $remote_addr;
-                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-                proxy_set_header X-Forwarded-Proto $scheme;
             }
         }
     }
@@ -381,7 +377,6 @@ To enhance our application and introduce load balancing, we'll integrate Nginx a
     * **`server web-app:5002`:** Specifies the Flask app service and port. Docker Compose's internal DNS resolves `web-app` to the container IPs.
     * **`listen 80`:** Nginx listens on port 80.
     * **`proxy_pass http://flask_app`:** Forwards requests to the `flask_app` upstream group.
-    * **`proxy_set_header` directives:** Passes necessary headers to the Flask app.
 
 3.  **Remove Port Mapping from web-app:**
 
