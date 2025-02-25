@@ -1,11 +1,14 @@
 # Flask App with Redis and Docker Compose
 
-This project demonstrates a multi-container application using a Python Flask web application and a Redis database, orchestrated with Docker Compose. The Flask application utilises Redis to store and retrieve a visitor count, providing a practical example of state management in a microservices architecture.
+This project demonstrates a multi-container application using a Python Flask web application and a Redis database, orchestrated with Docker Compose. The Flask application utilises Redis to store and retrieve a visitor count, providing a practical example of state management in a microservices architecture. 
+
+All the files created for this project are located in the [docker-challenge](.) directory.
 
 ## Table of Contents
 
 * [Objective](#objective)
 * [Requirements](#requirements)
+* [Project Files](#project-files)
 * [Project Setup](#project-setup)
 * [Dockerfile Configuration Breakdown](#dockerfile-configuration-breakdown)
 * [docker-compose.yml Breakdown (Initial Setup with Port Mapping)](#docker-composeyml-breakdown-initial-setup-with-port-mapping)
@@ -36,6 +39,13 @@ Create a multi-container application consisting of a simple Python Flask web app
 * **Testing:**
     * Access the Welcome Page: Open your browser and go to `http://localhost` to see the welcome message.
     * Test the Visit Count: Navigate to `http://localhost/count` to see the visit count increment each time you refresh the page.
+
+## Project Files
+
+* [Dockerfile](Dockerfile)
+* [flask-app.py](flask-app.py)
+* [docker-compose.yml](docker-compose.yml)
+* [nginx.conf](nginx.conf)
 
 ## Project Setup
 
