@@ -439,6 +439,8 @@ These steps verify that:
 * The application is accessible through port 80 via Nginx.
 * The Redis database is still persisting the visitor count.
 
+![Results](results.gif)
+
 ## Conclusion
 
 This project demonstrates how to build and scale a multi-container application using Docker Compose, Flask, Redis, and Nginx. We covered the process from setting up the initial application to implementing load balancing and ensuring data persistence. By leveraging Docker Compose, we simplified the orchestration of our services and created a scalable and robust application.
